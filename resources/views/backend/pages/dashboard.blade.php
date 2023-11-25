@@ -6,7 +6,8 @@ Dashboard
 
 @section('admin_content')
 <div class="row">
-    <h1>Starts from here</h1>
+    <div class="col-12">
+        <h1>This is dashboard</h1>
+    </div>
 </div>
-
 @endsection
