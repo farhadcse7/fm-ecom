@@ -27,24 +27,23 @@ class LoginController extends Controller
         ];
 
         //login attempt if success then redirect dashboard
-        if(Auth::attempt($credentials, $request->filled('remember'))){
+        if (Auth::attempt($credentials, $request->filled('remember'))) {
             $request->session()->regenerate();
             return redirect()->intended('admin/dashboard');
         }
 
         //return error message
         return back()->withErrors([
-            'email'=>'wrong credentials found !'
+            'email' => 'wrong credentials found !'
         ])->onlyInput('email');
-
     }
 
-    public function logout(Request $request){
+    public function logout(Request $request)
+    {
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
         return redirect()->route('admin.login');
-
     }
 }
