@@ -15,5 +15,11 @@
 <!-- Template Base Scripts End -->
 
 <!-- Page Specific Scripts Start -->
+
+{{-- Toastr --}}
+<script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
+{!! Toastr::message() !!}
+{{-- Toastr end --}}
+
 @stack('admin_script')
 <!-- Page Specific Scripts End -->
