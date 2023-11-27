@@ -34,13 +34,13 @@
         </a>
         <ul id="products">
           <li>
-            <a href="Products.List.html">
+            <a href="{{ route('products.index') }}">
               <span class="label">List</span>
             </a>
           </li>
           <li>
-            <a href="Products.Detail.html">
-              <span class="label">Detail</span>
+            <a href="{{ route('products.create') }}">
+              <span class="label">Add new</span>
             </a>
           </li>
         </ul>
@@ -82,6 +82,26 @@
           </li>
         </ul>
       </li>
+
+      <li>
+        <a href="#testimonials" data-href="testimonial.html">
+          <i data-cs-icon="cupcake" class="icon" data-cs-size="18"></i>
+          <span class="label">Testimonial</span>
+        </a>
+        <ul id="testimonials">
+          <li>
+            <a href="{{ route('testimonial.index') }}">
+              <span class="label">List</span>
+            </a>
+          </li>
+          <li>
+            <a href="{{ route('testimonial.create') }}">
+              <span class="label">Add new</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+
       <li>
         <a href="#storefront" data-href="Storefront.html">
           <i data-cs-icon="screen" class="icon" data-cs-size="18"></i>

@@ -25,6 +25,7 @@ return new class extends Migration
             $table->longText('additional_info')->nullable();
             $table->string('product_image')->default('default_product.jpg');
             $table->unsignedSmallInteger('product_rating')->nullable()->default(0);
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
             $table->softDeletes();
         });
