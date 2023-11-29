@@ -8,8 +8,10 @@ use App\Http\Controllers\Backend\CouponController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\DashboardController;
+use App\Http\Controllers\Frontend\CustomerController;
 use App\Http\Controllers\Backend\TestimonialController;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
+use App\Http\Controllers\Frontend\Auth\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +31,19 @@ Route::prefix('')->group(function(){
     Route::get('/shopping-cart', [CartController::class, 'cartPage'])->name('cart.page');
     Route::post('/add-to-cart', [CartController::class, 'addToCart'])->name('add-to.cart');
     Route::get('/remove-from-cart/{cart_id}', [CartController::class, 'removeFromCart'])->name('removefrom.cart');
+
+     /*Authentication routes for Customer/Guest */
+     Route::get('/register', [RegisterController::class, 'registerPage'])->name('register.page');
+     Route::post('/register', [RegisterController::class, 'registerStore'])->name('register.store');
+     Route::get('/login', [RegisterController::class, 'loginPage'])->name('login.page');
+     Route::post('/login', [RegisterController::class, 'loginStore'])->name('login.store');
+
+     Route::prefix('customer/')->middleware('auth')->group(function(){
+         Route::get('dashboard',[CustomerController::class, 'dashboard'])->name('customer.dashboard');
+         Route::get('logout', [RegisterController::class, 'logout'])->name('customer.logout');
+     });
+      /*Authentication routes for Customer/Guest end*/
+
 });
 
 

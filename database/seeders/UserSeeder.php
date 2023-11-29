@@ -20,6 +20,7 @@ class UserSeeder extends Seeder
             'is_system_admin' => 1,
             'name' => 'Admin',
             'email' => 'admin@gmail.com',
+            'phone' => '123456789',
             'email_verified_at' => now(),
             'password' => Hash::make(1234),
             'remember_token' => Str::random(10),
