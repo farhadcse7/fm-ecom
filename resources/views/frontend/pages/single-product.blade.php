@@ -49,10 +49,16 @@
                         </div>
                         <p>{{ $product->short_description }}</p>
                         <ul class="input-style">
-                            <li class="quantity cart-plus-minus">
-                                <input type="text" value="1" />
-                            </li>
-                            <li><a href="cart.html">Add to Cart</a></li>
+                            <form action="{{ route('add-to.cart') }}" method="post">
+                                @csrf
+                                <input type="hidden" name="product_slug" value="{{ $product->slug }}">
+                                <li class="quantity cart-plus-minus">
+                                    <input type="text" value="1" name="order_qty" />
+                                </li>
+                                <li>
+                                    <button type="submit" class="btn btn-danger">Add to Cart</button>
+                                </li>
+                            </form>
                         </ul>
                         <ul class="cetagory">
                             <li>Categories:</li>
