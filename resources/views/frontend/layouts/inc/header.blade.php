@@ -12,7 +12,8 @@
                 <div class="col-md-6 col-12">
                     <ul class="d-flex account_login-area">
                         <li>
-                            <a href="javascript:void(0);"><i class="fa fa-user"></i> My Account <i class="fa fa-angle-down"></i></a>
+                            <a href="javascript:void(0);"><i class="fa fa-user"></i> My Account <i
+                                    class="fa fa-angle-down"></i></a>
                             <ul class="dropdown_style">
                                 <li><a href="login.html">Login</a></li>
                                 <li><a href="register.html">Register</a></li>
@@ -33,8 +34,8 @@
                 <div class="col-lg-3 col-md-7 col-sm-6 col-6">
                     <div class="logo">
                         <a href="{{ route('home') }}">
-                    <img src="{{ asset('assets/frontend') }}/images/logo.png" alt="">
-                    </a>
+                            <img src="{{ asset('assets/frontend') }}/images/logo.png" alt="">
+                        </a>
                     </div>
                 </div>
                 <div class="col-lg-7 d-none d-lg-block">
@@ -74,6 +75,7 @@
                         </ul>
                     </nav>
                 </div>
+
                 <div class="col-md-4 col-lg-2 col-sm-5 col-4">
                     <ul class="search-cart-wrapper d-flex">
                         <li class="search-tigger"><a href="javascript:void(0);"><i class="flaticon-search"></i></a></li>
@@ -108,43 +110,33 @@
                                 </li>
                             </ul>
                         </li>
+                        {{-- cart part --}}
                         <li>
                             <a href="javascript:void(0);"><i class="flaticon-shop"></i> <span>3</span></a>
                             <ul class="cart-wrap dropdown_style">
-                                <li class="cart-items">
-                                    <div class="cart-img">
-                                        <img src="{{ asset('assets/frontend') }}/images/cart/1.jpg" alt="">
-                                    </div>
-                                    <div class="cart-content">
-                                        <a href="{{ route('cart.page') }}">Pure Nature Product</a>
-                                        <span>QTY : 1</span>
-                                        <p>$35.00</p>
-                                        <i class="fa fa-times"></i>
-                                    </div>
-                                </li>
-                                <li class="cart-items">
-                                    <div class="cart-img">
-                                        <img src="{{ asset('assets/frontend') }}/images/cart/3.jpg" alt="">
-                                    </div>
-                                    <div class="cart-content">
-                                        <a href="{{ route('cart.page') }}">Pure Nature Product</a>
-                                        <span>QTY : 1</span>
-                                        <p>$35.00</p>
-                                        <i class="fa fa-times"></i>
-                                    </div>
-                                </li>
-                                <li class="cart-items">
-                                    <div class="cart-img">
-                                        <img src="{{ asset('assets/frontend') }}/images/cart/2.jpg" alt="">
-                                    </div>
-                                    <div class="cart-content">
-                                        <a href="{{ route('cart.page') }}">Pure Nature Product</a>
-                                        <span>QTY : 1</span>
-                                        <p>$35.00</p>
-                                        <i class="fa fa-times"></i>
-                                    </div>
-                                </li>
-                                <li>Subtotol: <span class="pull-right">$70.00</span></li>
+                                @php
+                                    $carts = \Gloudemans\Shoppingcart\Facades\Cart::content();
+                                    $total_price = \Gloudemans\Shoppingcart\Facades\Cart::subtotal();
+                                @endphp
+
+                                @foreach ($carts as $item)
+                                    <li class="cart-items">
+                                        <div class="cart-img">
+                                            <img src="{{ asset('uploads/product_photos') }}/{{ $item->options->product_image }}"
+                                                alt="" class="img-fluid rounded" style="width: 60px;">
+                                        </div>
+                                        <div class="cart-content text-white">
+                                            <a href="{{ route('cart.page') }}">{{ $item->name }}</a>
+                                            <span>QTY : {{ $item->qty }}</span>
+                                            <p>${{ $item->qty * $item->price }}</p>
+                                            <a href="{{ route('removefrom.cart', ['cart_id' => $item->rowId]) }}">
+                                                <i class="fa fa-times"></i>
+                                            </a>
+                                        </div>
+                                    </li>
+                                @endforeach
+
+                                <li>Subtotol: <span class="pull-right">${{ $total_price }}</span></li>
                                 <li>
                                     <button>Check Out</button>
                                 </li>
@@ -155,10 +147,10 @@
                 <div class="col-md-1 col-sm-1 col-2 d-block d-lg-none">
                     <div class="responsive-menu-tigger">
                         <a href="javascript:void(0);">
-                    <span class="first"></span>
-                    <span class="second"></span>
-                    <span class="third"></span>
-                    </a>
+                            <span class="first"></span>
+                            <span class="second"></span>
+                            <span class="third"></span>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -184,12 +176,12 @@
                             <li class="sidemenu-items">
                                 <a class="has-arrow" aria-expanded="false" href="javascript:void(0);">Pages </a>
                                 <ul aria-expanded="false">
-                                  <li><a href="about.html">About Page</a></li>
-                                  <li><a href="single-product.html">Product Details</a></li>
-                                  <li><a href="{{ route('cart.page') }}">Shopping cart</a></li>
-                                  <li><a href="checkout.html">Checkout</a></li>
-                                  <li><a href="wishlist.html">Wishlist</a></li>
-                                  <li><a href="faq.html">FAQ</a></li>
+                                    <li><a href="about.html">About Page</a></li>
+                                    <li><a href="single-product.html">Product Details</a></li>
+                                    <li><a href="{{ route('cart.page') }}">Shopping cart</a></li>
+                                    <li><a href="checkout.html">Checkout</a></li>
+                                    <li><a href="wishlist.html">Wishlist</a></li>
+                                    <li><a href="faq.html">FAQ</a></li>
                                 </ul>
                             </li>
                             <li class="sidemenu-items">

@@ -21,3 +21,5 @@
     <link rel="stylesheet" href="{{ asset('assets/frontend') }}/css/responsive.css">
     <!-- modernizr css -->
     <script src="{{ asset('assets/frontend') }}/js/vendor/modernizr-2.8.3.min.js"></script>
+
+    <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">

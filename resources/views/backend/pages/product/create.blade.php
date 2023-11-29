@@ -17,7 +17,7 @@
             <div class="d-flex justify-content-start">
                 <a href="{{ route('products.index') }}" class="btn btn-primary">
                     <i class="fas fa-backward"></i>
-                    Back to Categories
+                    Back to Products
                 </a>
             </div>
         </div>
