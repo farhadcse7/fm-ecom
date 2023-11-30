@@ -55,7 +55,7 @@ class CartController extends Controller
         return back();
     }
 
-    //coupon //$string = "31,720.00"; $numberString = str_replace(',', '', $string); $number = (float) $numberString;
+    //coupon
     public function couponApply(Request $request)
     {
         if(!Auth::check()){
@@ -81,13 +81,20 @@ class CartController extends Controller
             $check_validity =  $check->validity_till > Carbon::now()->format('Y-m-d');
             // if coupon date is not expried
             if($check_validity){
-               // check coupon discount type
+               // check coupon discount type //$string = "31,720.00"; $numberString = str_replace(',', '', $string); $number = (float) $numberString;
+               $numberSubtotal = str_replace(',', '', Cart::subtotal());
                 Session::put('coupon', [
                     'name' => $check->coupon_name,
-                    'discount_amount' => round((Cart::subtotal() * $check->discount_amount)/100),
-                    'cart_total' => Cart::subtotal(),
-                    'balance' => round(Cart::subtotal() - (Cart::subtotal() * $check->discount_amount)/100)
+                    'discount_amount' => round(($numberSubtotal * $check->discount_amount)/100),
+                    'cart_total' => $numberSubtotal,
+                    'balance' => round($numberSubtotal - ($numberSubtotal * $check->discount_amount)/100)
                 ]);
+                // Session::put('coupon', [
+                //     'name' => $check->coupon_name,
+                //     'discount_amount' => round((Cart::subtotal() * $check->discount_amount)/100),
+                //     'cart_total' => Cart::subtotal(),
+                //     'balance' => round(Cart::subtotal() - (Cart::subtotal() * $check->discount_amount)/100)
+                // ]);
                 Toastr::success('Coupon Percentage Applied!!', 'Successfully!!');
                 return redirect()->back();
             }else{
