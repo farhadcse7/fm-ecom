@@ -69,7 +69,7 @@
 
                                 <div class="col-12">
                                     <p>Order Notes </p>
-                                    <textarea name="order_note" placeholder="Notes about Your Order, e.g.Special Note for Delivery"></textarea>
+                                    <textarea name="order_notes" placeholder="Notes about Your Order, e.g.Special Note for Delivery"></textarea>
                                 </div>
                             </div>
 

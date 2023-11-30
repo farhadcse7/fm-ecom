@@ -17,7 +17,6 @@ class CartController extends Controller
     public function cartPage()
     {
         $carts = Cart::content();
-        // $total_price = Cart::subtotal();
         $total_price = Cart::subtotal();
         // return $carts;
         return view('frontend.pages.shopping-cart', compact('carts', 'total_price'));
@@ -47,7 +46,6 @@ class CartController extends Controller
     }
 
     //Remove from cart
-
     public function removeFromCart($cart_id)
     {
         Cart::remove($cart_id);
@@ -81,20 +79,13 @@ class CartController extends Controller
             $check_validity =  $check->validity_till > Carbon::now()->format('Y-m-d');
             // if coupon date is not expried
             if($check_validity){
-               // check coupon discount type //$string = "31,720.00"; $numberString = str_replace(',', '', $string); $number = (float) $numberString;
-               $numberSubtotal = str_replace(',', '', Cart::subtotal());
-                Session::put('coupon', [
-                    'name' => $check->coupon_name,
-                    'discount_amount' => round(($numberSubtotal * $check->discount_amount)/100),
-                    'cart_total' => $numberSubtotal,
-                    'balance' => round($numberSubtotal - ($numberSubtotal * $check->discount_amount)/100)
-                ]);
-                // Session::put('coupon', [
-                //     'name' => $check->coupon_name,
-                //     'discount_amount' => round((Cart::subtotal() * $check->discount_amount)/100),
-                //     'cart_total' => Cart::subtotal(),
-                //     'balance' => round(Cart::subtotal() - (Cart::subtotal() * $check->discount_amount)/100)
-                // ]);
+                // check coupon discount type
+                 Session::put('coupon', [
+                     'name' => $check->coupon_name,
+                     'discount_amount' => round((Cart::subtotalFloat() * $check->discount_amount)/100),
+                     'cart_total' => Cart::subtotalFloat(),
+                     'balance' => round(Cart::subtotalFloat() - (Cart::subtotalFloat() * $check->discount_amount)/100)
+                 ]);
                 Toastr::success('Coupon Percentage Applied!!', 'Successfully!!');
                 return redirect()->back();
             }else{
