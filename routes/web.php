@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Order;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Frontend\CartController;
@@ -48,13 +49,20 @@ Route::prefix('')->group(function(){
          /*Coupon apply & remove */
         Route::post('cart/apply-coupon', [CartController::class, 'couponApply'])->name('customer.couponapply');
         Route::get('cart/remove-coupon/{coupon_name}', [CartController::class, 'removeCoupon'])->name('customer.couponremove');
-     });
-      /*Authentication routes for Customer/Guest end*/
 
       /*Checkout Page */
       Route::get('checkout', [CheckoutController::class, 'checkoutPage'])->name('customer.checkoutpage');
       Route::post('placeorder', [CheckoutController::class, 'placeOrder'])->name('customer.placeorder');
 
+     /* web mail http://127.0.0.1:8000/customer/email */
+      Route::get('email', function(){
+        $order = Order::whereId(1)->with(['billing', 'orderdetails'])->get();
+        return view('frontend.mail.purchaseconfirm', [
+            'order_details' => $order
+        ]);
+    });
+
+  });
 });
 
 
