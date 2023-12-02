@@ -20,12 +20,15 @@ class HomeController extends Controller
 
 
         $categories = Category::where('is_active', 1)
+        ->whereNull('deleted_at')
         ->latest('id')
         ->limit(5)
         ->select(['id', 'title', 'category_image','slug'])
         ->get();
 
         $products = Product::where('is_active',1)
+            ->whereHas('category', function ($query) { $query->whereNull('deleted_at');})
+            ->with('category')
             ->latest('id')
             ->select('id','name','slug','product_price', 'product_stock', 'product_rating', 'product_image')
             ->paginate(12);
@@ -42,11 +45,14 @@ class HomeController extends Controller
     public function shopPage()
     {
         $allproducts = Product::where('is_active', 1)
+        ->whereHas('category', function ($query) { $query->whereNull('deleted_at');})
+        ->with('category')
         ->latest('id')
         ->select('id','name','slug','product_price', 'product_stock', 'product_rating', 'product_image')
         ->paginate(12);
 
         $categories = Category::where('is_active', 1)
+        ->whereNull('deleted_at')
         ->with('products')
         ->latest('id')
         ->limit(5)

@@ -60,7 +60,8 @@
                                                                     @foreach ($order->orderDetails as $item)
                                                                     <tr>
                                                                         <td>{{ $loop->index+1 }}</td>
-                                                                        <td>{{ $item->product->name}}</td>
+                                                                        {{-- <td>{{ $item->product->name}}</td> --}}
+                                                                        <td>{{ optional($item->product)->name ?? 'deleted product'}}</td>
                                                                         <td>{{ $item->product_qty }}</td>
                                                                         <td>{{ $item->product_price }}</td>
                                                                         <td>{{ $item->product_price*$item->product_qty }}</td>

@@ -4,7 +4,6 @@ use App\Models\Order;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Backend\OrderController;
-use App\Http\Controllers\Backend\CustomerController as BackendCustomerController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Backend\CouponController;
@@ -13,9 +12,11 @@ use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Frontend\CheckoutController;
 use App\Http\Controllers\Frontend\CustomerController;
+use App\Http\Controllers\SslCommerzPaymentController;
 use App\Http\Controllers\Backend\TestimonialController;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 use App\Http\Controllers\Frontend\Auth\RegisterController;
+use App\Http\Controllers\Backend\CustomerController as BackendCustomerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -94,4 +95,19 @@ Route::prefix('admin/')->group(function(){
 
 });
 /* Admin Auth routes */
+
+
+// SSLCOMMERZ Start
+Route::get('/example1', [SslCommerzPaymentController::class, 'exampleEasyCheckout']);
+Route::get('/example2', [SslCommerzPaymentController::class, 'exampleHostedCheckout']);
+
+Route::post('/pay', [SslCommerzPaymentController::class, 'index']);
+Route::post('/pay-via-ajax', [SslCommerzPaymentController::class, 'payViaAjax']);
+
+Route::post('/success', [SslCommerzPaymentController::class, 'success']);
+Route::post('/fail', [SslCommerzPaymentController::class, 'fail']);
+Route::post('/cancel', [SslCommerzPaymentController::class, 'cancel']);
+
+Route::post('/ipn', [SslCommerzPaymentController::class, 'ipn']);
+//SSLCOMMERZ END
 
