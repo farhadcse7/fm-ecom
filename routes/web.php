@@ -30,6 +30,9 @@ use App\Http\Controllers\Frontend\Auth\RegisterController;
 
 Route::prefix('')->group(function(){
     Route::get('/', [HomeController::class, 'home'])->name('home');
+    Route::get('/about', [HomeController::class, 'about'])->name('about');
+    Route::get('/blog', [HomeController::class, 'blog'])->name('blog');
+    Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
     Route::get('/shop', [HomeController::class, 'shopPage'])->name('shop.page');
     Route::get('/single-product/{product_slug}', [HomeController::class, 'productDetails'])->name('productdetail.page');
     Route::get('/shopping-cart', [CartController::class, 'cartPage'])->name('cart.page');

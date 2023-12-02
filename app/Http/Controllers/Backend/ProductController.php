@@ -21,6 +21,7 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::where('is_active', 1)
+            ->whereHas('category', function ($query) { $query->whereNull('deleted_at');})
             ->with('category')
             ->latest('id')
             ->select('id', 'category_id', 'name', 'slug', 'product_price', 'product_stock', 'alert_quantity', 'product_image', 'product_rating','updated_at')

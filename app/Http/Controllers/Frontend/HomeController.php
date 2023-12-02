@@ -71,4 +71,17 @@ class HomeController extends Controller
         ->get();
         return view('frontend.pages.single-product', compact('product', 'related_products'));
     }
+
+    public function about(){
+
+        return view('frontend.pages.about');
+    }
+    public function blog(){
+
+        return view('frontend.pages.blog');
+    }
+    public function contact(){
+
+        return view('frontend.pages.contact');
+    }
 }

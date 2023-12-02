@@ -102,7 +102,7 @@
         </ul>
       </li>
 
-      <li>
+      {{-- <li>
         <a href="#storefront" data-href="Storefront.html">
           <i data-cs-icon="screen" class="icon" data-cs-size="18"></i>
           <span class="label">Storefront</span>
@@ -144,13 +144,15 @@
             </a>
           </li>
         </ul>
-      </li>
-      <li>
+      </li> --}}
+
+      {{-- <li>
         <a href="Shipping.html">
           <i data-cs-icon="shipping" class="icon" data-cs-size="18"></i>
           <span class="label">Shipping</span>
         </a>
-      </li>
+      </li> --}}
+
       <li>
         <a href="{{ route('coupon.index') }}">
           <i data-cs-icon="tag" class="icon" data-cs-size="18"></i>
